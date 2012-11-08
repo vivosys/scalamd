@@ -3,17 +3,18 @@
  */
 package org.fusesource.scalamd.test
 
-import org.specs.runner.JUnit4
-import org.specs.Specification
+import org.specs2.mutable.Specification
+import org.specs2.specification._
 import java.io.File
 import org.fusesource.scalamd.Markdown
 import org.apache.commons.io.FileUtils
 import org.apache.commons.lang.StringUtils
-import org.specs.matcher.Matcher
+import org.specs2.matcher.Matcher
+import org.junit.runner._
+import org.specs2.runner._
 
-class SpecsTest extends JUnit4(MarkdownSpec)
-
-object MarkdownSpec extends Specification {
+@RunWith(classOf[JUnitRunner])
+class MarkdownSpec extends Specification {
 
   val beFine = new Matcher[String] {
     def apply(name: => String) = {
@@ -30,9 +31,7 @@ object MarkdownSpec extends Specification {
     }
   }
 
-  def process = addToSusVerb("process")
-
-  "MarkdownProcessor" should process {
+  "MarkdownProcessor" should {
     "Images" in {
       "Images" must beFine
     }
